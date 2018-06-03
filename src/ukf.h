@@ -67,6 +67,18 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  ///* create sigma point matrix
+  MatrixXd Xsig_aug_;
+
+  ///* previous timestamp
+  long long previous_timestamp_;
+
+  ///* the current NIS for radar
+  double NIS_radar_;
+
+  ///* the current NIS for laser
+  double NIS_laser_;
+
 
   /**
    * Constructor
@@ -102,6 +114,14 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  protected:
+
+  void GenerateSigmaPoints(MatrixXd* Xsig_out);
+  void AugmentedSigmaPoints(MatrixXd* Xsig_out);
+  void SigmaPointPrediction(MatrixXd* Xsig_out, double delta_t);
+  void UpdatePredState();
+
 };
 
 #endif /* UKF_H */

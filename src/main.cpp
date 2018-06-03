@@ -124,12 +124,15 @@ int main()
     	  estimate(1) = p_y;
     	  estimate(2) = v1;
     	  estimate(3) = v2;
+
+        //std::cout << "Estimate:" << estimate << std::endl;
     	  
     	  estimations.push_back(estimate);
 
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 
           json msgJson;
+          msgJson["test"] = 0;
           msgJson["estimate_x"] = p_x;
           msgJson["estimate_y"] = p_y;
           msgJson["rmse_x"] =  RMSE(0);
